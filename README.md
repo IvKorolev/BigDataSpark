@@ -19,19 +19,22 @@
 
 ```bash
 BigDataSpark/
+├── clickhouse_sql/
+│   └──2_clickhouse_views.sql    # создаем вьюшки
 ├── data/                        # исходники
 ├── spark/
-│   └── jobs/                   
+│   └── jobs/       
+│   ├── create_star_tables.ipynb # Spark ETL: в звезду
+│   ├── create_star_tables.py
+│   ├── clickhouse.ipynb         # Spark ETL: репорты в кликхаус
+│   └── clickhouse.py            
 ├── sql_scripts/
 │   └── 1_raw_table.sql          # mock_data в PostgreSQL
 ├── work/
 │   ├── jars/
 │   │   ├── postgresql-42.7.3.jar     # надо скачать
 │   │   └── clickhouse-jdbc-0.6.3.jar # надо скачать
-│   ├── create_star_tables.ipynb # Spark ETL: в звезду
-│   ├── create_star_tables.py
-│   ├── clickhouse.ipynb         # Spark ETL: репорты в кликхаус
-│   └── clickhouse.py
+│
 ├── docker-compose.yml
 └── README.md
 
@@ -54,33 +57,18 @@ curl -L -o work/jars/clickhouse-jdbc-0.6.3.jar https://repo1.maven.org/maven2/co
 docker compose up -d
 ``` 
 
-### 2. Открыть Jupyter
-Перейти в браузере по адресу:
+### 2. Запустить ETL-пайплайн
 
-```text
-http://localhost:8888
-```
-
-Если нужен token:
 ```bash
-docker logs spark_jupyter
-```
+bash run_pipeline.sh
+``` 
+Скрипт: 
+1. ожидает готовности PostgreSQL и ClickHouse
+2. запускает Spark ETL raw -> star schema; 
+3. запускает Spark ETL star schema -> ClickHouse; 
+4. создаёт представления (views) в ClickHouse.
 
-### 3. Построить модель звезда в PostgreSQL
-В Jupyter открыть и выполнить сверху вниз ноутбук:
-
-```text
-work/create_star_tables.ipynb
-```
-
-### 4. Построить витрины в ClickHouse
-В Jupyter открыть и выполнить сверху вниз ноутбук:
-
-```text
-work/clickhouse.ipynb
-```
-
-### 5. Проверить результат
+### 3. Проверить результат
 
 #### PostgreSQL
 Подключение:

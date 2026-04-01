@@ -91,7 +91,7 @@ print("fact_sales:", fact_sales_df.count())
 
 
 # In[30]:
-
+from pyspark.sql.functions import col
 
 sales_full_df = (
     fact_sales_df.alias("f")
