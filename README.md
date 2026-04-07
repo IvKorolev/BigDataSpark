@@ -42,25 +42,15 @@ BigDataSpark/
 ```
 ## Алгоритм запуска
 
-## JDBC-драйверы
-
-Перед запуском необходимо скачать JDBC-драйверы в папку `work/jars`:
-
-```bash
-mkdir -p work/jars
-curl -L -o work/jars/postgresql-42.7.3.jar https://jdbc.postgresql.org/download/postgresql-42.7.3.jar
-curl -L -o work/jars/clickhouse-jdbc-0.6.3.jar https://repo1.maven.org/maven2/com/clickhouse/clickhouse-jdbc/0.6.3/clickhouse-jdbc-0.6.3.jar
-```
 ### 1. Поднять инфраструктуру
 
 ```bash
 docker compose up -d
 ``` 
 
-### 2. Запустить ETL-пайплайн
-
+### 2. Подождать 20-30 секунд до поднятия бд, для логов
 ```bash
-bash run_pipeline.sh
+docker logs -f spark_jobs
 ``` 
 Скрипт: 
 1. ожидает готовности PostgreSQL и ClickHouse
