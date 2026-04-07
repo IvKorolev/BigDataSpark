@@ -48,10 +48,14 @@ BigDataSpark/
 docker compose up -d
 ``` 
 
-### 2. Подождать 20-30 секунд до поднятия бд, для логов
+### 2. Подождать минуту до поднятия бд, для логов
 ```bash
 docker logs -f spark_jobs
 ``` 
+
+Признак успешности:
+ - Pipeline completed successfully.
+
 Скрипт: 
 1. ожидает готовности PostgreSQL и ClickHouse
 2. запускает Spark ETL raw -> star schema; 
