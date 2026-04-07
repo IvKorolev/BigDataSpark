@@ -47,6 +47,21 @@ services:
     networks:
       - lab2_network
 
+  spark-jobs:
+    image: jupyter/pyspark-notebook:latest
+    container_name: spark_jobs
+    depends_on:
+      - postgres
+      - clickhouse
+    volumes:
+      - ./work:/home/jovyan/work
+      - ./spark:/home/jovyan/spark
+      - ./clickhouse_sql:/home/jovyan/clickhouse_sql
+      - ./data:/home/jovyan/data
+    networks:
+      - lab2_network
+    entrypoint: ["bash", "/home/jovyan/spark/jobs/run_pipeline.sh"]
+
 networks:
   lab2_network:
     driver: bridge
