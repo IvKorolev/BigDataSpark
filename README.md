@@ -27,14 +27,14 @@ BigDataSpark/
 │   ├── create_star_tables.ipynb # Spark ETL: в звезду
 │   ├── create_star_tables.py
 │   ├── clickhouse.ipynb         # Spark ETL: репорты в кликхаус
-│   └── clickhouse.py            
+│   ├── clickhouse.py
+│   └── run_pipeline.sh            
 ├── sql_scripts/
 │   └── 1_raw_table.sql          # mock_data в PostgreSQL
 ├── work/
-│   ├── jars/
-│   │   ├── postgresql-42.7.3.jar     # надо скачать
-│   │   └── clickhouse-jdbc-0.6.3.jar # надо скачать
-│
+│   └── jars/
+│       ├── postgresql-42.7.3.jar     
+│       └── clickhouse-jdbc-0.6.3.jar 
 ├── docker-compose.yml
 └── README.md
 
